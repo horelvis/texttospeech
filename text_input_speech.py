@@ -1,10 +1,11 @@
 # Google's CLOUD TEXT-TO-SPEECH https://cloud.google.com/text-to-speech/
 
 from google.cloud import texttospeech
+from playsound import playsound
 import os
 
 # auth setup https://cloud.google.com/docs/authentication/getting-started
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'/Users/horelvis/git/speech-to-text-google/sanny-a84f639cfb00.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'./sanny-a84f639cfb00.json'
 
 # Instantiates client
 client = texttospeech.TextToSpeechClient()
@@ -28,3 +29,4 @@ response = client.synthesize_speech(synthesis_input, voice, audio_config)
 with open('text_output_speech.mp3', 'wb') as out:
     # Write the response to the output file.
     out.write(response.audio_content)
+    playsound('text_output_speech.mp3')
